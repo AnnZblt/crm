@@ -1,5 +1,4 @@
 'use strict';
-//[index, name, id, category, units, count, price, sum, image]
 
 const goods = [
   {
