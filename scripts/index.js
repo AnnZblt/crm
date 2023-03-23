@@ -89,66 +89,27 @@ const tableBody = document.querySelector('.table__body');
 
 overlay.classList.remove('active');
 
-const createRow = (obj) => {
+const createRow = ({ index, id, name, category, units, count, price }) => {
   const row = document.createElement('tr');
 
-  const tableIndex = document.createElement('td');
-  tableIndex.textContent = obj.index;
-  tableIndex.classList.add('table__cell');
-  row.appendChild(tableIndex);
-
-  const productName = document.createElement('td');
-  productName.textContent = obj.name;
-  productName.classList.add('table__cell', 'table__cell_left', 'table__cell_name');
-  productName.dataset.id = obj.id;
-  row.appendChild(productName);
-
-  const productId = document.createElement('span');
-  productId.textContent = 'ID: ' + obj.id;
-  productId.classList.add('table__cell-id');
-  productName.prepend(productId);
-
-  const productCategory = document.createElement('td');
-  productCategory.textContent = obj.category;
-  productCategory.classList.add('table__cell', 'table__cell_left');
-  row.appendChild(productCategory);
-
-  const productUnits = document.createElement('td');
-  productUnits.textContent = obj.units;
-  productUnits.classList.add('table__cell');
-  row.appendChild(productUnits);
-
-  const productCount = document.createElement('td');
-  productCount.textContent = obj.count;
-  productCount.classList.add('table__cell');
-  row.appendChild(productCount);
-
-  const productPrice = document.createElement('td');
-  productPrice.textContent = obj.price;
-  productPrice.classList.add('table__cell');
-  row.appendChild(productPrice);
-
-  const productSum = document.createElement('td');
-  productSum.textContent = obj.calculateSum();
-  productSum.classList.add('table__cell');
-  row.appendChild(productSum);
-
-  const productButtons = document.createElement('td');
-  productButtons.classList.add('table__cell', 'table__cell_btn-wrapper');
-  row.appendChild(productButtons);
-
-  const buttonImg = document.createElement('button');
-  buttonImg.classList.add('table__btn', 'table__btn_pic');
-  productButtons.appendChild(buttonImg);
-
-  const buttonEdit = document.createElement('button');
-  buttonEdit.classList.add('table__btn', 'table__btn_edit');
-  productButtons.appendChild(buttonEdit);
-
-  const buttonDel = document.createElement('button');
-  buttonDel.classList.add('table__btn', 'table__btn_del');
-  productButtons.appendChild(buttonDel);
-
+  row.innerHTML = `
+  <tr>
+    <td class="table__cell">${index}</td>
+    <td class="table__cell table__cell_left table__cell_name data-id="${id}">
+      <span class="table__cell-id">ID: ${id}</span>
+      ${name}</td>
+    <td class="table__cell table__cell_left">${category}</td>
+    <td class="table__cell">${units}</td>
+    <td class="table__cell">${count}</td>
+    <td class="table__cell">$${price}</td>
+    <td class="table__cell">$${count * price}</td>
+    <td class="table__cell table__cell_btn-wrapper">
+      <button class="table__btn table__btn_pic"></button>
+      <button class="table__btn table__btn_edit"></button>
+      <button class="table__btn table__btn_del"></button>
+    </td>
+  </tr>
+  `;
   return row;
 }
 
