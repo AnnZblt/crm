@@ -81,13 +81,32 @@ const goods = [
 console.log(goods[0]);
 
 const modalTitle = document.querySelector('.modal__title');
+const overlay = document.querySelector('.overlay');
+const overlayModal = overlay.querySelector('.overlay__modal');
 const modalForm = document.querySelector('.modal__form');
 const modalDiscountCheckBox = modalForm.querySelector('.modal__checkbox');
 const modalDiscountInput = modalForm.querySelector('.modal__input_discount');
-const overlay = document.querySelector('.overlay');
+const btnClose = overlayModal.querySelector('.modal__close');
+const bntAddGoods = document.querySelector('.panel__add-goods');
 const tableBody = document.querySelector('.table__body');
 
+
 overlay.classList.remove('active');
+bntAddGoods.addEventListener('click', () => {
+  overlay.classList.add('active');
+});
+
+overlayModal.addEventListener('click', event => {
+  event.stopPropagation();
+});
+
+btnClose.addEventListener('click', () => {
+  overlay.classList.remove('active');
+});
+
+overlay.addEventListener('click', () => {
+  overlay.classList.remove('active');
+});
 
 const createRow = ({ index, id, name, category, units, count, price }) => {
   const row = document.createElement('tr');
