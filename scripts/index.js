@@ -1,5 +1,7 @@
 'use strict';
 
+//Goods database
+
 const goods = [
   {
     index: 3,
@@ -16,9 +18,6 @@ const goods = [
       small: "img/smrtxiaomi11t-m.jpg",
       big: "img/smrtxiaomi11t-b.jpg"
     },
-    calculateSum() {
-      return this.sum = this.price * this.count;
-    }
   },
   {
     index: 4,
@@ -35,9 +34,6 @@ const goods = [
       small: "img/cheetancar-m.jpg",
       big: "img/cheetancar-b.jpg"
     },
-    calculateSum() {
-      return this.sum = this.price * this.count;
-    }
   },
   {
     index: 5,
@@ -54,9 +50,6 @@ const goods = [
       small: "img/tvboxmecool-m.jpg",
       big: "img/tvboxmecool-b.jpg"
     },
-    calculateSum() {
-      return this.sum = this.price * this.count;
-    }
   },
   {
     index: 6,
@@ -73,12 +66,8 @@ const goods = [
       small: "img/lan_proconnect43-3-25.jpg",
       big: "img/lan_proconnect43-3-25-b.jpg"
     },
-    calculateSum() {
-      return this.sum = this.price * this.count;
-    }
   }
 ];
-console.log(goods[0]);
 
 const modalTitle = document.querySelector('.modal__title');
 const overlay = document.querySelector('.overlay');
@@ -86,30 +75,21 @@ const overlayModal = overlay.querySelector('.overlay__modal');
 const modalForm = document.querySelector('.modal__form');
 const modalDiscountCheckBox = modalForm.querySelector('.modal__checkbox');
 const modalDiscountInput = modalForm.querySelector('.modal__input_discount');
-const btnClose = overlayModal.querySelector('.modal__close');
 const bntAddGoods = document.querySelector('.panel__add-goods');
 const tableBody = document.querySelector('.table__body');
-
+const tableItem = document.querySelectorAll('.table__body tr').forEach(tr => {
+  tr.classList.add('table__row', 'goods__item');
+});
 
 overlay.classList.remove('active');
-bntAddGoods.addEventListener('click', () => {
-  overlay.classList.add('active');
-});
+tableBody.classList.add('goods__list');
 
-overlayModal.addEventListener('click', event => {
-  event.stopPropagation();
-});
-
-btnClose.addEventListener('click', () => {
-  overlay.classList.remove('active');
-});
-
-overlay.addEventListener('click', () => {
-  overlay.classList.remove('active');
-});
+//Goods creating
 
 const createRow = ({ index, id, name, category, units, count, price }) => {
   const row = document.createElement('tr');
+  row.classList.add('table__row', 'goods__item');
+  row.dataset.index = index;
 
   row.innerHTML = `
   <tr>
@@ -141,3 +121,37 @@ const renderGoods = (arr) => {
 }
 
 renderGoods(goods);
+
+
+// Buttons behavior
+
+bntAddGoods.addEventListener('click', () => {
+  overlay.classList.add('active');
+});
+
+overlay.addEventListener('click', event => {
+  if (event.target === overlay || event.target.closest('.modal__close')) {
+    console.log(event.target);
+    overlay.classList.remove('active');
+  }
+});
+
+tableBody.addEventListener('click', event => {
+  const target = event.target;
+
+  if (target.closest('.table__btn_del')) {
+    const goodsItemId = +(target.closest('.goods__item').dataset.index);
+    console.log(goodsItemId);
+    goods.forEach((item, i) => {
+      if (item.index === goodsItemId) {
+        console.log(i);
+        goods.splice(i, 1);
+      }
+    }
+    );
+
+    target.closest('.goods__item').remove();
+
+    console.log(goods);
+  }
+});
