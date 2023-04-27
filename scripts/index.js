@@ -114,8 +114,8 @@ const createRow = ({ index, id, name, category, discount, discount_count, units,
     <td class="table__cell table__cell_left">${category}</td>
     <td class="table__cell">${units}</td>
     <td class="table__cell">${count}</td>
-    <td class="table__cell goods__price">$${price}</td>
-    <td class="table__cell goods__sum">$${count * price}</td>
+    <td class="table__cell goods__price">$${Math.floor(price)}</td>
+    <td class="table__cell goods__sum">$${Math.floor(count * price)}</td>
     <td class="table__cell table__cell_btn-wrapper">
       <button class="table__btn table__btn_pic"></button>
       <button class="table__btn table__btn_edit"></button>
@@ -149,7 +149,7 @@ const findCmsTotalPrice = () => {
     itemsSum += +itemSum;
   }
 
-  goodsTotalPrice.textContent = '$ ' + itemsSum;
+  goodsTotalPrice.textContent = '$ ' + Math.floor(itemsSum);
 
 };
 
@@ -207,7 +207,7 @@ const renderGoodsId = (min, max) => {
 };
 
 const findModalTotalPrice = (sum, count, price, discount) => {
-  sum.textContent = `$ ${count * (price * ((100 - discount) / 100))}`;
+  sum.textContent = `$ ${Math.floor(count * (price * ((100 - discount) / 100)))}`;
 };
 
 
@@ -278,7 +278,10 @@ const createGoods = (form, list, arr, id) => {
 
     addGoodsItemPage(newGoodsItem, list);
     addGoodsData(newGoodsItem);
+
     form.reset();
+    modalDiscountInput.disabled = true;
+    modalTotalPrice.textContent = `$ 0`;
     closeModal();
     findCmsTotalPrice();
   });
