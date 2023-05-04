@@ -100,7 +100,7 @@ goodsList.classList.add('goods__list');
 const createRow = ({ index, id, name, category, discount, discount_count, units, count, price }) => {
   const row = document.createElement('tr');
   row.classList.add('table__row', 'goods__item');
-  row.dataset.index = index;
+  row.dataset.id = id;
   if (+discount === 1 || discount === 'on') {
     price = price * ((100 - discount_count) / 100);
   };
@@ -236,31 +236,13 @@ overlay.addEventListener('click', event => {
   }
 });
 
-goodsList.addEventListener('click', event => {
-  const target = event.target;
 
-  if (target.closest('.table__btn_del')) {
-    const goodsItemId = +(target.closest('.goods__item').dataset.index);
-    goods.forEach((item, i) => {
-      if (item.index === goodsItemId) {
-        goods.splice(i, 1);
-      }
-    });
-
-    target.closest('.goods__item').remove();
-    findCmsTotalPrice();
-
-    console.log(goods);
-  }
-});
 
 
 // Add goods on page from modal
 
 const addGoodsData = item => {
   goods.push(item);
-  console.log('Goods items: ', goods);
-  console.log(allGoodsSum);
 };
 
 const addGoodsItemPage = (goodsItem, goodsList) => {
@@ -288,3 +270,25 @@ const createGoods = (form, list, arr, id) => {
 };
 
 createGoods(modalForm, goodsList, goods, vendorCodeId);
+
+
+
+// Remove item
+
+goodsList.addEventListener('click', event => {
+  const target = event.target;
+
+  if (target.closest('.table__btn_del')) {
+    const goodsItemId = +(target.closest('.goods__item').dataset.id);
+    goods.forEach((item, i) => {
+      if (+item.id === goodsItemId) {
+        goods.splice(i, 1);
+      }
+    });
+
+    target.closest('.goods__item').remove();
+    findCmsTotalPrice();
+
+    console.log(goods);
+  }
+});
