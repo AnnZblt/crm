@@ -8,7 +8,8 @@ import * as modalControls from '/scripts/modules/modalControls.js';
 
 const createRow = (
   {
-    index, id, name, category, discount, discountCount, units, count, price,
+    index, id, name, category, discount, discountCount,
+    units, count, price, image,
   }) => {
   const row = document.createElement('tr');
   row.classList.add('table__row', 'goods__item');
@@ -29,7 +30,7 @@ const createRow = (
     <td class="table__cell goods__price">$${Math.floor(+price)}</td>
     <td class="table__cell goods__sum">$${Math.floor(+count * +price)}</td>
     <td class="table__cell table__cell_btn-wrapper">
-      <button class="table__btn table__btn_pic"></button>
+      <button class="table__btn table__btn_pic" data-pic="${image}"></button>
       <button class="table__btn table__btn_edit"></button>
       <button class="table__btn table__btn_del"></button>
     </td>

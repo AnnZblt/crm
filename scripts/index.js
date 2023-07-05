@@ -6,6 +6,8 @@ import { renderGoods } from '/scripts/modules/renderElements.js';
 import findCmsTotalPrice from '/scripts/modules/priceControls.js';
 import { modalControl } from '/scripts/modules/modalControls.js';
 import { removeGoodsData } from '/scripts/modules/dataControls.js';
+import { openImagePreview } from '/scripts/modules/interactionControls.js';
+
 
 const init = () => {
   getGoodsIndex(goods);
@@ -32,6 +34,7 @@ const init = () => {
     pageElements.modalTotalPrice);
   removeGoodsData(goods, pageElements.goodsList,
     pageElements.goodsTotalPrice, pageElements.goodsIndeces);
+  openImagePreview(pageElements.goodsList);
 };
 
 init();

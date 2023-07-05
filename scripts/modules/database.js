@@ -16,10 +16,7 @@ export const goods = [
     count: 3,
     price: 27000,
     sum: 0,
-    images: {
-      small: 'img/smrtxiaomi11t-m.jpg',
-      big: 'img/smrtxiaomi11t-b.jpg',
-    },
+    image: '../img/xiaomi11t.jpeg',
   },
   {
     name: 'Радиоуправляемый автомобиль Cheetan',
@@ -33,10 +30,7 @@ export const goods = [
     count: 1,
     price: 4000,
     sum: 0,
-    images: {
-      small: 'img/cheetancar-m.jpg',
-      big: 'img/cheetancar-b.jpg',
-    },
+    image: '../img/cheetah-car.jpeg',
   },
   {
     name: 'ТВ приставка MECOOL KI',
@@ -51,10 +45,7 @@ export const goods = [
     count: 4,
     price: 12400,
     sum: 0,
-    images: {
-      small: 'img/tvboxmecool-m.jpg',
-      big: 'img/tvboxmecool-b.jpg',
-    },
+    image: '../img/mecool-ki.jpeg',
   },
   {
     name: 'Витая пара PROConnect 01-0043-3-25',
@@ -73,10 +64,7 @@ export const goods = [
     count: 420,
     price: 22,
     sum: 0,
-    images: {
-      small: 'img/lan_proconnect43-3-25.jpg',
-      big: 'img/lan_proconnect43-3-25-b.jpg',
-    },
+    image: '../img/pro-connect-010043325.jpeg',
   },
 ];
 
